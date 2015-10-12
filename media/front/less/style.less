@@ -1,0 +1,914 @@
+@import "globals.less";
+
+@white:							#FFFFFF;
+@black:							#000000;
+@color1:						#000000; //normal text
+@color2:						#58595b; //gris oscuro | texto general explicaciones
+@color3:                                                #818386; //girs mas claro | logo
+@color4:                                                #FFFFFF; //blanco
+
+
+@colorCategoria1:                                       #e2a200;//amarillo categoria1
+@colorClaroCategoria1:                                  #f4fbe5;
+@colorCategoria2:                                       #3462c5;//azul categoria 2
+@colorClaroCategoria2:                                  #f4fbe5;
+@colorCategoria3:                                       #c63272;//rosa categoria 3
+@colorClaroCategoria3:                                  #f4fbe5;
+@colorCategoria4:                                       #7600d4;//PURPURA categoria 4
+@colorClaroCategoria4:                                  #f4fbe5;
+@colorCategoria5:                                       #8fd400;//VERDE categoria 5
+@colorClaroCategoria5:                                  #f4fbe5;
+
+.color1 { //amarillo categoria1
+    .colors( @colorCategoria1, @colorClaroCategoria1 );
+}
+.color2 { //azul categoria 2
+    .colors( @colorCategoria2, @colorClaroCategoria2 );
+}
+.color3 { //rosa categoria 3
+    .colors( @colorCategoria3, @colorClaroCategoria3 );
+}
+.color4 { //purpura categoria4
+    .colors( @colorCategoria4, @colorClaroCategoria4 );
+}
+.color5 { //verde categoria 5
+    .colors( @colorCategoria5, @colorClaroCategoria5 );
+}
+
+@errorIcon:                                             '../img/icons/error.png';
+@iconOk:                                                '../img/icons/ok.jpg';
+
+.font1Normal {
+    font-family:                                        'Noto Serif', serif;
+    font-weight:                                        400;
+}
+.font1Bold {
+    font-family:                                        'Noto Serif', serif;
+    font-weight:                                        700;
+}
+.font2Normal {
+    font-family:                                        'Maven Pro', sans-serif; //menu header
+    font-weight:                                        400;
+}
+.font2Bold {
+    font-family:                                        'Maven Pro', sans-serif;
+    font-weight:                                        700;
+}
+
+@widthSite:                                             960px;
+@paddingTop:                                            40px;
+
+@widthLogo:                                             80px;
+@marginLogoRight:                                       56px;
+
+@paddingHeaderBottom:                                   44px;
+
+@leftColumWidth:                                        290px;
+@leftColumMarginRight:                                  45px;
+@rightColumWidth:                                       @widthSite - @leftColumWidth - @leftColumMarginRight;
+
+@widthThumb:                                            290px;
+@borderThumb:                                           1px;
+
+@borderButton:                                          1px;
+body {
+    position:                                           relative;
+    color:                                              @color1;
+    .font1Normal;
+    font-size:                                          14px;
+    line-height:                                        16px;
+}
+a {
+    color:                                              @color1;
+    text-decoration:                                    underline;
+}
+
+h1 {
+    .font1Bold;
+    font-size:                                          30px;
+    line-height:                                        30px;
+    color:                                              @color3;
+
+}
+h2 {
+    .font1Normal;
+    font-size:                                          20px;
+    line-height:                                        20px;
+    margin-bottom:                                      16px;
+}
+h3 {
+    .font1Normal;
+    font-size:                                          18px;
+    line-height:                                        18px;
+    margin-bottom:                                      14px;
+}
+p {
+    color:                                              @color2;
+    .font2Normal;
+    -webkit-margin-before:                              0;
+    -webkit-margin-after:                               0;
+}
+textarea {
+    resize:                                             none;
+}
+
+.button,
+.NFI-button{
+    //display:                                            inline-block;
+    background:                                         @black;
+    color:                                              @white;
+    .font1Normal;
+    padding:                                            9px 26px;
+    border:                                             @borderButton solid @black;
+    float:                                              right;
+    cursor:                                             pointer;
+    
+    .transition( .4s all );
+    &:hover{
+        color:                                          @black;
+        background:                                     @white;
+        .arrowWhite.rightArrow {
+            border-left-color:                          @black;
+        }
+    }
+} //button
+
+.buttonSmall {
+    //display:                                            inline-block;
+    //background:                                         @black;
+    background: #8fd400;
+    color:                                              @white;
+    .font1Normal;
+    padding:                                            3px 0px;
+    border:                                             @borderButton solid @black;
+    float:                                              left;
+    cursor:                                             pointer;
+    width: 80px;
+    text-align: center;
+    text-decoration: none;
+
+    .transition( .4s all );
+    &:hover{
+        color:                                          @black;
+        background:                                     @white;
+        .arrowWhite.rightArrow {
+            border-left-color:                          @black;
+        }
+    }
+} //buttonSmall
+
+.thumbContainer {
+    display:                                            inline-block;
+    position:                                           relative;
+    float:                                              left;
+    cursor:                                             pointer;
+    border-style:                                       solid;
+    border-width:                                       1px;
+    width:                                              290px;
+    height:                                             160px;
+    overflow:                                           hidden;
+    text-align: center;
+    &:hover .over {
+        .opacity(.4);
+    }
+    img {
+        //display:                                        block;
+        height: 100%;
+    }
+    
+    .over {
+        .absoluteTopLeft( 0,0 );
+        width:                                          100%;
+        height:                                         100%;
+        background:                                     @black;
+        .opacity(0);
+        .transition( .4s all );
+    }
+    .icon {
+        .absoluteTopLeft( 0,0 );
+        width:                                          100%;
+        height:                                         100%;
+        background-position:                            center;
+        background-repeat:                              no-repeat;
+        
+    }
+    //overlay sobre la img
+    .categoria {
+        .absoluteBottomLeft( 0, 0 );
+        min-width:                                      86px;
+        padding:                                        0 8px;
+        color:                                          @color4;
+        height:                                         22px;
+        line-height:                                    22px;
+        text-align:                                     center;
+        .font2Normal;
+    }
+    
+    input {
+        display:                                        block;
+        margin:                                         70px auto 0 auto;
+    }
+} //thumbnailContainer
+
+#login {
+    width:                                              100%;
+    height:                                             100%;
+    .absoluteTopLeft( 0,0 );
+    
+    @widthSection:                                      380px;
+    @paddingLogo:                                       180px;
+    @paddingLeftInput:                                  80px;
+    
+    .content{
+        width:                                          @widthSection;
+        margin:                                         33% auto 0 auto;
+        overflow:                                       hidden;
+        height:                                         100%;
+    }
+    .containerLogin {
+        border-top:                                     2px solid @colorCategoria5;
+        border-bottom:                                  2px solid @colorCategoria5;
+    }
+    #loginTools {
+        padding:                                        30px 0;
+        border-top:                                     1px solid @colorCategoria5;
+        border-bottom:                                  1px solid @colorCategoria5;
+        margin:                                         3px 0;
+    } //loginTools
+    
+    #errorLogin {
+        //display:                                        none;
+        @heigthSection:                                 34px;
+        margin-top:                                     10px;
+        p {
+            color:                                      red;
+            font-size:                                  14px;
+            line-height:                                @heigthSection;
+            height:                                     @heigthSection;
+            display:                                    inline-block;
+        }
+        
+        .icon {
+            float:                                      left;
+            display:                                    inline-block;
+            margin-right:                               12px;
+            width:                                      24px;
+            height:                                     @heigthSection;
+            background:                                 url( @errorIcon ) no-repeat transparent left center;
+        }
+    } //errorLogin
+    
+    h1 {
+        padding-left:                                   @paddingLogo;
+        line-height:                                    80px;
+        height:                                         80px;
+        margin-bottom:                                  30px;
+        background:                                     url( '../img/logoLogin.jpg' ) no-repeat 60px center transparent;
+    }
+    
+    input {
+        @borderInput:                                   1px;
+        padding:                                        0 0 0 @paddingLeftInput;
+        width:                                          @widthSection - @paddingLeftInput - ( @borderInput * 2 );
+        border:                                         @borderInput solid @black;
+        height:                                         33px;
+        line-height:                                    33px;
+        text-align:                                     left;
+        &.error {
+            border-color:                               red;
+        }
+    } //input
+    
+    #loginButton {
+        display:                                        block;
+        width:                                          @widthSection;
+        height:                                         56px;
+        line-height:                                    56px;
+        font-size:                                      22px;
+        color:                                          @white;
+        text-align:                                     center;
+        background-color:                               @black;
+        cursor:                                         pointer;
+        
+        .arrowRight {
+            .arrowRight( @white, 6px, 4px 0 0 6px );
+            display:                                    inline-block;
+        }
+        
+    } //loginButton
+    
+    #userTools {
+        background:                                     url( '../img/userLogin.jpg' ) no-repeat 20px center transparent;
+        margin-bottom:                                  20px;
+    }
+    #passTools {
+        background:                                     url( '../img/passLogin.jpg' ) no-repeat 20px center transparent;
+        margin-bottom:                                  30px;
+    }
+} //login
+
+#wrapper {
+    height:                                             100%;
+    width:                                              @widthSite;
+    margin:                                             0 auto;
+} //wrapper
+
+.headerContainer {
+    padding:                                            @paddingTop 0;
+    overflow:                                           hidden;
+}
+
+.header {
+    position:                                           relative;
+    overflow:                                           hidden;
+    padding-bottom:                                     @paddingHeaderBottom;
+    border-bottom-width:                                1px;
+    border-bottom-style:                                solid;
+    h1 {
+        display:                                        inline-block;
+        width:                                          @widthSite - @widthLogo - @marginLogoRight;
+        float:                                          left;
+        color:                                          @color3;
+    }
+    .menu {
+        overflow:                                       hidden;
+        width:                                          @widthSite - @widthLogo - @marginLogoRight;
+        .absoluteBottomLeft( @paddingHeaderBottom ,@widthLogo + @marginLogoRight );
+        li {
+            float:                                      left;
+            margin-right:                               14px;
+            min-width:                                  132px;
+            padding-top:                                12px;
+            border-top:                                 1px solid @color1;
+            a {
+               text-decoration:                         none;
+               .font2Normal;
+               font-size:                               16px;
+               line-height:                             16px;
+               .transition( .4s all );
+            }
+            &:hover, &.active{
+                border-top-width:                       2px;
+                a {
+                    font-weight:                        700;
+                }
+            } //active
+        } //li
+    } //menu
+
+} //header
+
+.breadcrumb {
+    margin-top:                                         14px;
+    overflow:                                           hidden;
+    width:                                              100%;
+    li {
+        float:                                          left;
+        display:                                        inline-block;
+        &:after {
+            content:                                    '>>';
+            padding:                                    0 3px;
+        } //after
+        
+        &:last-child:after {
+            content:                                    '';
+            display:                                    none;
+        }
+    } //li
+} //breadcrumb
+
+.logo {
+    width:                                              @widthLogo;
+    height:                                             80px;
+    display:                                            inline-block;
+    background:                                         url( '../img/logo.png' ) center center no-repeat;
+    margin-right:                                       @marginLogoRight;
+    float:                                              left;
+}
+//----------------------header-----------------
+
+.content {
+    position:                                           relative;
+    //margin:                                            40px 0;
+}
+
+.leftColum {
+    width:                                              @leftColumWidth;
+    display:                                            inline-block;
+    float:                                              left;
+    margin-right:                                       @leftColumMarginRight;
+}
+.columRight {
+    width:                                              @rightColumWidth;
+    display:                                            inline-block;
+    float:                                              right;
+    overflow:                                           hidden;
+}
+.formStyle {
+    overflow:                                           hidden;
+    position:                                           relative;
+    padding:                                            15px;
+    margin-bottom:                                      @paddingTop;
+    border-top-style:                                   solid;
+    border-bottom-style:                                solid;
+    border-top-width:                                   1px;
+    border-bottom-width:                                1px;
+    input, select{
+        display:                                        block;
+        //width:                                          248px;
+        padding:                                        3px;
+        margin-bottom:                                  8px;
+    }
+    select {
+        width:                                          260px;
+    }
+    input {
+        width:                                          248px;
+    }
+
+} //formStyle
+
+//----listProjects--------------------
+    @borderWidthThumb:                                  1px;
+    .listProjects {
+        overflow:                                       hidden;
+        display:                                        block;
+        position:                                       relative;
+        li {
+            overflow:                                   hidden;
+            display:                                    block;
+            position:                                   relative;
+            margin-bottom:                              78px;
+            p {
+                margin-bottom:                          2px;
+            }
+        } //li
+        .thumbContainer {
+            margin-right:                               45px;
+        }
+        .dataContainer {
+            padding-top:                                11px;
+            display:                                    inline-block;
+        }
+        .button {
+            .absoluteBottomRight( 12px, @borderWidthThumb );
+        }
+    } //listProjects
+    
+//----listProjects--------------------
+//----projectsForm--------------------
+    @widthCajaInputs:                                   625px;
+    @heightInputs:                                      23px;
+    @borderInputs:                                      1px;
+    @paddingLateralInput:                               5px;
+    @widthP:                                            170px;
+    .formBig{
+        overflow:                                       hidden;
+        position:                                       relative;
+        .cajaForm {
+            display:                                    block;
+            margin-bottom:                              20px;
+            overflow:                                   hidden;
+            div {
+                .font2Normal;
+                color:                                  red;
+                float:                                  right;
+                font-size:                              80%
+            }
+
+        }
+        p {
+            float:                                      left;
+            display:                                    inline-block;
+            width:                                      @widthP;
+            height:                                     @heightInputs + ( 2 * @borderInputs );
+            line-height:                                @heightInputs + ( 2 * @borderInputs );
+        }
+        .readOnly{
+            .font2Normal;
+        }
+
+
+    } //formBig
+    .formInput {
+        display:                                    inline-block;
+        float:                                      right;
+        width:                                      @widthCajaInputs - @widthP - ( 2 * @borderInputs ) - ( 2 * @paddingLateralInput );
+        border:                                     @borderInputs solid @black; //esto del color del tema? o es muy cargante?
+        height:                                     @heightInputs;
+        line-height:                                @heightInputs;
+        padding:                                    0 @paddingLateralInput;
+        &.error {
+            //.font2Normal;
+            //color:                                  red;
+            border:                                     1px red solid;
+        }
+    }
+    .cajaInputs {
+        float:                                          left;
+        width:                                          @widthCajaInputs;
+        display:                                        inline-block;
+    }
+    .thumbCalendars {
+        width:                                          @widthThumb + ( 2 * @borderThumb );
+        position:                                       relative;
+        float:                                          right;
+        display:                                        inline-block;
+        .font2Normal;
+        .thumbContainer {
+            margin-bottom:                              80px;
+        }
+        
+    } //thumbCalendars
+    
+    //-------estilizar input file ------------------
+        .NFI-wrapper {
+            float:                                      right;
+            overflow:                                   hidden;
+            width:                                      @widthCajaInputs - @widthP + ( @borderInputs * 2 ) - ( @borderButton * 2 ) ; //por los border del boton 
+            height:                                     @heightInputs + ( @borderInputs * 2 );
+            line-height:                                @heightInputs + ( @borderInputs * 2 ); //muy feo este + 2
+        }
+        .NFI-button {
+            float:                                      right;
+        }
+        .NFI-filename {
+            float:                                      left;
+            width:                                      309px;
+            padding:                                    0 @paddingLateralInput;
+            height:                                     @heightInputs;
+            line-height:                                @heightInputs;
+            border:                                     @borderInputs solid @black; //esto del color del tema? o es muy cargante?
+        }
+        .buttonBigForm,
+        .fileNice .NFI-button {
+            height:                                     @heightInputs;
+            line-height:                                @heightInputs; 
+            padding-top:                                0;
+            padding-bottom:                             0;
+        }    //-------estilizar input file ------------------
+        .countries {
+            width:                                      309px;
+            overflow:                                   hidden;
+            position:                                   relative;
+            display:                                    inline-block;
+        }
+        .flag {
+            float:                                      left;
+            display:                                    inline-block;
+            cursor:                                     pointer;
+            line-height:                                0;
+            margin:                                     0 5px 5px 0;
+            img {
+                border:                                 1px solid @color2;
+            }
+        }
+        
+        .dateStyle {
+            height:                                     20px;
+            line-height:                                20px;
+            border:                                     @borderInputs solid @black;
+            padding:                                    0 @paddingLateralInput;
+        }
+//----projectsForm--------------------
+
+
+//calendar-----------------------------------
+        .calendars {
+            display:                                    block;
+            float:                                      right;
+            position:                                   relative;
+            width:                                      @widthThumb + ( 2 * @borderThumb );
+            p{
+                font-size:                              12px;
+                width:                                  auto;
+            }
+            input {
+                width:                                  90px;
+                float:                                  right;
+            }
+            label {
+                //width:                                  ( @widthThumb + ( 2 * @borderThumb ) ) / 2;
+                width:                                  ( ( @widthThumb - ( 4 * @borderThumb ) ) / 2 ) - 3; 
+                display:                                inline-block;
+                position:                               relative;
+                &:first-child{
+                    margin-right:                       7px;
+                }
+            } //label
+            .lineCalendars{
+                margin-bottom:                          12px;
+            }
+        } //calendars
+        .ui-datepicker {
+            background-color:                           @white;
+        }
+        .ui-datepicker-next span,
+        .ui-datepicker-prev span {
+            top:                                        6px;
+            cursor:                                     pointer;
+        }
+        td.ui-datepicker-week-col {
+            text-align:                                 center;
+            border-right:                               1px solid #cacaca;
+        }
+        .ui-datepicker-trigger {
+            .absoluteTopRight( 2px, 2px );
+            padding:                                    1px;
+            cursor:                                     pointer;
+        }
+        
+    #search {
+        .calendars {
+            float:                                      none;
+            width:                                      auto;
+            overflow:                                   hidden;
+            margin-bottom:                              9px;
+            label {
+                width:                                  50%;
+                margin:                                 0;
+                float:                                  left;
+            }
+            p {
+                display:                                inline-block;
+                &.secondInput {
+                    padding-left:                       7px;
+                }
+            }
+            input {
+                padding:                                0 0 0 3px;
+            }
+        }
+    } //search
+//calendar-------------------------------------
+
+
+    #formProject {
+        border-bottom-width:                            @borderThumb;
+        border-bottom-style:                            solid;
+        padding-bottom:                                 20px;
+    }
+
+
+//countriesRights [START]----------------------------------------------
+.countriesRights {
+    padding:                                            28px 0;
+    overflow:                                           hidden;
+    position:                                           relative;
+    
+    
+}
+#addCountriesButton {
+    float:                                              left;
+}
+.countriesSelectContainer {
+    margin-bottom: 30px;
+    color: #58595b;
+    font-family: "Maven Pro",sans-serif;
+    font-weight: 400;
+}
+.countriesFormContainer {
+    padding-top: 20px;
+    margin-top: 30px;
+    border-top: solid 1px grey;
+    .actionRightsButtons {
+        .button {
+            margin-right: 10px;
+        }
+    }
+    .countryBox {
+        height:                                         295px;
+        width:                                          425px;
+        padding:                                        15px 17px;
+        margin-bottom:                                  42px;
+        border-top-style:                               solid;
+        border-bottom-style:                            solid;
+        border-top-width:                               1px;
+        border-bottom-width:                            1px;
+        p {
+            font-size: 14px;
+        }
+        .approveContainer {
+            p {
+                font-size: 12px;
+            }
+        }
+        .longInput {
+            width:                                      412px;
+            margin-bottom:                              10px;
+        }
+        .calendars{
+            width:                                      425px;
+            label {
+                width:                                  207px;
+            }
+            input {
+                width:                                  126px;
+            }
+            p {
+                float:                                  left;
+                line-height:                            21px;
+            }
+        } //calendars
+        .filesCountries {
+            overflow:                                   hidden;
+            width:                                      100%;
+            p, input {
+                margin-bottom:                          15px;
+            }
+            div {
+                overflow:                               hidden;
+                position:                               relative;
+            }
+            .button {
+                .absoluteTopRight( 5px,0 );
+            }
+        } //filesCountries
+        .fileUp {
+            width:                                      203px;
+            display:                                    inline-block;
+            float:                                      left;
+            padding-right:                              34px;
+            background-position:                        right center;
+            background-repeat:                          no-repeat;
+            height:                                     25px;
+            line-height:                                25px;
+            &.pdf {
+                background-image:                       url( '../img/icons/pdf.png' );
+            }
+        }
+        .viewContainer {
+            float:left;
+            margin-bottom: 10px;
+        }
+        .approveContainer {
+            display:                                    inline-block;
+            overflow:                                   hidden;
+            width:                                      120px;
+            float:                                      right;
+            input {
+                display:                                inline-block;
+                float:                                  right;
+            }
+            p {
+                display:                                inline-block;
+            }
+        }
+        .updateContainer {
+            //float: left;
+            clear: both;
+            .buttonSmall {
+                float: right;
+            }
+        }
+        .ok {
+            display:                                    inline-block;
+            background:                                 url( @iconOk ) no-repeat;
+            width:                                      20px;
+            height:                                     20px;
+            float:                                      right;
+        }
+        
+    } //countrybox
+} //countriesFromContainer
+
+.generalData {
+    margin-bottom:                                      45px;
+    label {
+        display:                                        block;
+        overflow:                                       hidden;
+        margin-bottom:                                  15px;
+    }
+    p {
+        width:                                          167px;
+        float:                                          left;
+    }
+}
+.generalInputBox  {
+    width:                                              456px;
+    display:                                            inline-block;
+    float:                                              left;
+}
+textarea.generalInputBox {
+    height:                                             48px;
+    width:                                              781px;
+}
+.detailsCountries {
+    overflow:                                           hidden;
+    position:                                           relative;
+}
+
+.arrowWhite {
+    display:                                            inline-block;
+    .arrowRight( @white, 5px, 0 0 0 14px );
+}
+
+//countriesRights [END]----------------------------------------------
+
+.colors( @colorBg, @colorBg2 ) {
+
+    @colorDark:                                         darken(@colorBg, 15%);
+
+    .logo {
+        background-color:                               @colorBg;
+    }
+    .header {
+        border-bottom-color:                            @colorBg;
+    }
+    .formStyle {
+        border-top-color:                               @colorBg;
+        border-bottom-color:                            @colorBg;
+        background-color:                               @colorBg2;
+    }
+    .thumbContainer {
+        background-color:                               @colorBg2;
+        border-color:                                   @colorBg;
+
+
+    }
+    .countryBox {
+        border-top-color:                               @colorBg;
+        border-bottom-color:                            @colorBg;
+        background-color:                               @colorBg2;
+    }    
+    //Calendar
+    .ui-datepicker .ui-datepicker-header {
+        background-color:                               @colorBg;
+    }
+    .ui-state-highlight, .ui-widget-content .ui-state-highlight,
+    .ui-widget-header .ui-state-highlight {
+        //border-color:                                   @colorDark;
+        background-color:                               @colorBg2;
+    }
+    
+    .ui-widget-content {
+        border-color:                                   @colorBg;
+    }
+    .ui-datepicker-next span {
+        .arrowRight( @colorBg2, 5px, 0 );
+    }
+    .ui-datepicker .ui-datepicker-next-hover span {
+        border-left-color:                             @colorDark;
+    }
+    .ui-datepicker-prev span {
+        .arrowLeft( @colorBg2, 5px, 0 );
+    }
+    .ui-datepicker .ui-datepicker-prev-hover span {
+        border-right-color:                             @colorDark;
+    }
+    .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus,
+    .ui-widget-header .ui-state-focus {
+        color:                                          @colorBg;
+    }
+    .ui-datepicker-trigger {
+        background-color:                               @colorBg;
+    }
+    //Calendar
+    #formProject {
+        border-bottom-color:                            @colorBg;
+    }
+} //colors
+
+
+.categoria1 { //tvc
+    .categoria {
+    @colorBg:                                           @colorCategoria1;
+    background-color:                                   @colorBg;
+    }
+    .icon {
+        background-image:                               url( '../img/play.png' );
+    }
+} //categoria1
+.categoria2 { //print
+    .categoria {
+        @colorBg:                                       @colorCategoria2;
+        background-color:                               @colorBg;
+    }
+    .icon {
+        background-image:                                   url( '../img/plus.png' );
+    }
+} //categoria2
+.categoria3 { //radio
+    .categoria {
+        @colorBg:                                           @colorCategoria3;
+        background-color:                                   @colorBg;
+    }
+    .icon {
+        background-image:                                   url( '../img/play.png' );
+    }
+} //categoria3
+.categoria4 { //outdoor
+    .categoria {
+        @colorBg:                                           @colorCategoria4;
+        background-color:                                   @colorBg;
+    }
+    .icon {
+        background-image:                                   url( '../img/plus.png' );
+    }
+} //categoria4
+.categoria5 {
+    .categoria {
+        @colorBg:                                           @colorCategoria5;
+        background-color:                                   @colorBg;
+    }
+}
